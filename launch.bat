@@ -1,1 +1,3 @@
-CALL .\bin\deno\deno.exe run .\src\main.ts
+@ECHO OFF
+CALL .\bin\deno.exe run .\src\main.ts
+PAUSE
