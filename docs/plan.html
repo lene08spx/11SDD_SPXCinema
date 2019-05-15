@@ -1,43 +1,111 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<style>
+		body {
+			float: left;
+			margin: 5ex 10ex;
+			background-color: #f0f0f0;
+			font-family: sans-serif;
+			color: #444;
+			position: relative;
+		}
+		h1 {
+			font-weight: normal;
+		}
+		li {
+			padding-left: 1em;
+		}
+		.day {
+			width: 100%;
+		}
+		h1, h2, h3, p, ul, li, pre {
+			float: left;
+			width: 55%;
+		}
+		ul {
+			margin: 0;
+			padding-left: 2em;
+		}
+		li {
+			padding-left: 0.5em;
+		}
+		img {
+			float: right;
+			max-width: 40%;
+		}
+		pre {
+			border-radius: 0.5em;
+			padding: 1em;
+			background-color: #d0e0f0;
+		}
+	</style>
 </head>
 <body>
-<h1>14th May 2019</h1>
-What does a cinema booking site need to do?
-+ Check how many seats are left.
-+ List the sessions at different cinemas.
-Reservations:
-+ Collect Names
-+ Verification? Email...?
-+ Seat IDs
-Main Page:
-Sessions:
-+ By Cinema
-+ By Movie
-Session Page / Booking Page:
-+ Available seats/ seating diagram
-+ Prices
+<h1 style="text-align:center; width:100%;">Project Log - SDD Task 2</h1>
 
-Methods for page generation:
-+ AJAX : More Tricky, Modular, Demo of dynamic ts execution (stdout of file as output?? or import module??)
-+ Server Pre-Rendered : Simple, Not so modular, Demo of TypeScriptPages
-
-Visits:
-https://stackoverflow.com/questions/3451111/unzipping-files-in-python/3451150
-https://stackabuse.com/download-files-with-python/
-https://www.tutorialspoint.com/How-can-I-create-a-directory-if-it-does-not-exist-using-Python
-
-Work Done:
-+ Setup Script (Install Dependencies)
-+ Start Script
-+ File Directory Structure
-+ Boilerplate
-<pre><code>
-BEGIN MAIN
-	LAUNCH WebServer
-END
+<h1 class="day">14th May 2019</h1>
 <img src="s1_20190514.png">
+<h3>What does a cinema booking site need to do?</h3>
+<ul>
+	<li>Check how many seats are left.</li>
+	<li>List the sessions at different cinemas.</li>
+</ul>
+<h3>Reservations:</h3>
+<ul>
+	<li>Collect Names</li>
+	<li>Verification? Email...?</li>
+	<li>Seat IDs</li>
+</ul>
+<h3>Main Page:</h3>
+<h3>Sessions:</h3>
+<ul>
+	<li>By Cinema</li>
+	<li>By Movie</li>
+</ul>
+<h3>Session Page / Booking Page:</h3>
+<ul>
+	<li>Available seats/ seating diagram</li>
+	<li>Prices</li>
+</ul>
+<h3>Methods for page generation:</h3>
+<ul>
+	<li>AJAX : More Tricky, Modular, Demo of dynamic ts execution (stdout of file as output?? or import module??)</li>
+	<li>Server Pre-Rendered : Simple, Not so modular, Demo of TypeScriptPages</li>
+</ul>
+<h3>Visits:</h3>
+<ul>
+	<li>https://stackoverflow.com/questions/3451111/unzipping-files-in-python/3451150</li>
+	<li>https://stackabuse.com/download-files-with-python/</li>
+	<li>https://www.tutorialspoint.com/How-can-I-create-a-directory-if-it-does-not-exist-using-Python</li>
+</ul>
+<h3>Work Done:</h3>
+<ul>
+	<li>Setup Script (Install Dependencies)</li>
+	<li>Start Script</li>
+	<li>File Directory Structure</li>
+	<li>Boilerplate</li>
+</ul>
+<h3>Algorithms:</h3>
+<pre><code>BEGIN MAIN
+  LAUNCH WebServer
+END
 </code></pre>
+
+<h1 class="day">15th May 2019</h1>
+<h3>Algorithms:</h3>
+<pre><code>BEGIN GET Sessions
+	GET Venues
+	FOR each venue, get sessions
+END
+
+</code></pre>
+<h3>Pages</h3>
+<ul>
+	<li>Login</li>
+	<li>Home Screen - Select based on Session or Location</li>
+	<li>Session Booking</li>
+	<li>Available Sessions</li>
+</ul>
 </body>
 </html>

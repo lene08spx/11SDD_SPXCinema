@@ -4,7 +4,7 @@ import os
 
 # Install
 #  Deno
-#  
+#  Deno_Std
 
 BIN_DIR = "./bin/"
 
@@ -36,3 +36,6 @@ zip_ref.close()
 
 os.remove(BIN_DIR+"deno.zip")
 print("Done!")
+
+# Download
+
