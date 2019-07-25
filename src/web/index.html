@@ -3,25 +3,69 @@
 <head>
     <link rel="stylesheet" href="./main.css"/>
     <style>
+		@font-face {
+			font-family: 'magneto';
+			src: url('./magneto.ttf');
+		}
+		html{box-sizing:border-box;}
+		*,*:before,*:after{box-sizing:inherit;}
         body {
-            float: left;
-            width: 100%;
+			position: relative;
+			width: 800px;
+			margin: 0 auto;
+			padding: 20px;
+			background-color: #9d0033;
+			background-image: url("./carpet.jpg");
+			background-blend-mode: multiply;
+			font-family: serif;
+			color: white;
         }
         .pageBanner {
             margin: 0 auto;
             width: 600px;
             height: 400px;
-            background-color: royalblue;
+			background-color: #670022;
+            background-image: url("./logo.png");
         }
         h1 {
             text-align: center;
+			/*font-family: magneto;*/
+			font-size: 60px;
         }
+		h2 {
+			text-align: center;
+			/*font-family: magneto;*/
+			font-size: 40px;
+		}
+		h3 {
+			width: 70%;
+			margin: 10px auto;
+			text-align: center;
+			border-bottom: 4px dotted gold;
+		}
+		.lampBorder {
+			display: inline-block;
+			position: absolute;
+			top: 0;
+			width: 50px;
+			height: 100%;
+			background-image: url("./lamp.png");
+			background-size: contain;
+		}
     </style>
 </head>
 <body>
+	<div class="lampBorder" style="left:0;"></div>
+	<div class="lampBorder" style="right:0;"></div>
     <div class="pageBanner"></div>
     <h1>Bookings</h1>
-    <h2 style="width:49%;float:left;text-align:center;">Book by Location</h2>
-    <h2 style="width:49%;float:right;text-align:center;">Book by Films</h2>
+    <h2>Book by Location</h2>
+	<h3>Chatswood</h3>
+	<h3>Hornsby</h3>
+	<h3>Mosman</h3>
+    <h2>Book by Films</h2>
+	<h3>Avengers: Endgame</h3>
+	<h3>Ratatouille</h3>
+	<h3>Star Wars Episode 4: A New Hope</h3>
 </body>
 </html>

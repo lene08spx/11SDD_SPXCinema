@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TypeWrite</title>
+	<style>
+		#page {
+			white-space: pre;
+			font-family: "Noto Mono";
+		}
+	</style>
+</head>
+<body>
+	<div id="page"></div>
+<script>
+const page = document.getElementById("page");
+
+function addText(str){
+	page.textContent = page.textContent + str;
+}
+
+function deleteChar(){
+	page.textContent = page.textContent.slice(0,-1);
+}
+
+document.onkeypress = function (e) {
+	switch (e.code) {
+		case "Enter":
+			addText("\n");
+		default:
+			break;
+	}
+}
+document.onkeydown = function (e) {
+	if (e.code === "Backspace") deleteChar();
+}
+</script>
+</body>
+</html>
