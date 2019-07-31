@@ -128,5 +128,43 @@ END
 <ul>
 	<li>https://www.publicdomainpictures.net/pictures/120000/nahled/seamless-carpet-pattern.jpg</li>
 </ul>
+
+<h1 class="day">29th July 2019</h1>
+<h3>Some Required Features</h3>
+<ul>
+	<li>Display a homepage</li>
+	<li>Select by cinema or by film</li>
+	<li>By Cinema: Select cinema, then list available films there</li>
+	<li>By Film: List all times in order, and display cinema underneath.</li>
+	<li>Data Storage: Films as an Object, Cinemas as an object. Cinema is a parent of films.</li>
+	<li></li>
+</ul>
+<h3>Example Storage</h3>
+<pre><code>{
+  "sessions": [
+    {
+      "cinema": 1,
+      "film": 1,
+      "time": "YYYY-MM-DDZ00:00:00"
+    }
+  ],
+  "cinemas": [
+    {
+      "name": "Hornsby",
+      "address": "01 Main Street,Hornsby,NSW,Australia",
+      "rooms": 2
+    }
+  ],
+  "films": [
+    {
+      "name": "Spiderman: Far From Home",
+      "duration": "2h19m",
+      "director": "NAME HERE",
+      "description": "Really Good Wow!",
+      "thumbnail": "IMG_1.png"
+    }
+  ]
+}</code></pre>
+
 </body>
 </html>

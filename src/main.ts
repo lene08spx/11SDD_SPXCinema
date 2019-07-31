@@ -1,26 +1,24 @@
 import { Http, Fs, Path, MAIN_DIR } from "./deps.ts";
-Http.ServerRequest.prototype.w.
-const MIME_TYPES = {
-    ".html": "text/html",
-    ".css": "text/css",
-    ".js": "application/javascript",
-    ".png": "image/png",
-    ".jpg": "image/jpg",
-    ".jpeg": "image/jpeg"
-};
 
-async function serveContent (filename: string): Promise<void> {
-    
+const PORT = 80;
+
+async function serveContent (filename: string): Promise<Uint8Array> {
+    return await Deno.readFile(filename);
 }
 
 async function main (): Promise<void> {
-    const s = Http.serve("0.0.0.0:8080");
+    const s = Http.serve(`0.0.0.0:${PORT}`);
+    console.log(`SPX Cinema @ http://localhost:80/`);
     for await (const r of s) {
         switch (r.url) {
-            case "/main.css":
-                
+            case "/":
+                r.respond({
+                    body: await serveContent(MAIN_DIR+"web/index.html"),
+                    status: 200
+                });
+                break;
             default:
-                serveContent(MAIN_DIR+"web/index.html");
+                
                 break;
         }
     }
