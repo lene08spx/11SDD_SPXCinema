@@ -1,24 +1,39 @@
-import { Http, Fs, Path, MAIN_DIR } from "./deps.ts";
+import { DenoHttp, DenoFs, DenoPath } from "./deps.ts";
 
-const PORT = 80;
+const WEB_PORT = 80;
+const WEB_ROOT = "./src/web"
 
-async function serveContent (filename: string): Promise<Uint8Array> {
-    return await Deno.readFile(filename);
+async function servePage( r: DenoHttp.ServerRequest, filename?: string ): Promise<void>
+{
+    let filePath = WEB_ROOT + (filename || r.url);
+    console.log(filePath);
+    if (await DenoFs.exists( filePath ))
+    {
+        r.respond({
+            "body": await Deno.readFile( filePath ),
+            "status": 200
+        });
+    }
+    else
+    {
+        r.respond({
+            "body": new TextEncoder().encode("<!DOCTYPE html><h1>404</h1>"),
+            "status": 404
+        });
+    }
 }
 
-async function main (): Promise<void> {
-    const s = Http.serve(`0.0.0.0:${PORT}`);
-    console.log(`SPX Cinema @ http://localhost:80/`);
+async function main(): Promise<void>
+{
+    const s = DenoHttp.serve(`0.0.0.0:${WEB_PORT}`);
+    console.log(`SPX Cinema @ http://localhost:${WEB_PORT}/`);
     for await (const r of s) {
         switch (r.url) {
             case "/":
-                r.respond({
-                    body: await serveContent(MAIN_DIR+"web/index.html"),
-                    status: 200
-                });
+                servePage( r, "/index.html" );
                 break;
             default:
-                
+                servePage( r );
                 break;
         }
     }
