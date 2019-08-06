@@ -14,7 +14,7 @@ async function servePage( r: DenoHttp.ServerRequest, filename?: string ): Promis
 		r.respond({
 			"body": await Deno.readFile( filePath ),
 			"headers": new Headers([
-				["Content-Type",DenoMediaTypes.contentType(filePath)||"text/plain"]
+				["Content-Type",DenoMediaTypes.lookup(filePath)||"text/plain"]
 			]),
 			"status": 200
 		});
@@ -22,7 +22,7 @@ async function servePage( r: DenoHttp.ServerRequest, filename?: string ): Promis
 	else
 	{
 		// Error 404
-		console.log(`!> 404`);
+		console.log(`!> 404::${r.url}`);
 		r.respond({
 			"body": new TextEncoder().encode("<!DOCTYPE html><h1>404</h1>"),
 			"headers": new Headers([
