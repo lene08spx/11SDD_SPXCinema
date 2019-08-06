@@ -30,15 +30,20 @@ h1 {
     font-family: Courier, monospace;
     text-align: left;
     color: #f5f5f5;
-    border-left: 50px solid #861021;
     border-radius: 20px;
     background-color: #333333;
 }
 .carpet {
-    background-image: url("./carpet32x.png");
+    background-image: url("./carpet32x_grey.png");
     background-size: 550px;
     image-rendering: pixelated;
     box-shadow: inset 0px 0px 50px 0px #000000;
+}
+.carpet.red {
+    background-image: url("./carpet32x_red.png");
+}
+.carpet.gold {
+    background-image: url("./carpet32x_gold1.png");
 }
 .fullImage {
     height: 100%;
