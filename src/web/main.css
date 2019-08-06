@@ -6,12 +6,33 @@ html{box-sizing:border-box;}
 *,*:before,*:after{box-sizing:inherit;}
 body {
     margin: 0;
-    background-color: #222;
+    background-color: #222222;
+}
+body > * {
+    vertical-align: top;
 }
 header {
     display: block;
     height: 100px;
     text-align: center;
+}
+h1 {
+    font-family: Courier, monospace;
+    text-align: center;
+    color: #f5f5f5;
+}
+.card {
+    width: 100%;
+    margin-top: 10px;
+    padding: 20px 40px;
+    box-shadow: 0 0 7px 0 #000000;
+    font-size: 30px;
+    font-family: Courier, monospace;
+    text-align: left;
+    color: #f5f5f5;
+    border-left: 50px solid #861021;
+    border-radius: 20px;
+    background-color: #333333;
 }
 .carpet {
     background-image: url("./carpet32x.png");
@@ -22,14 +43,10 @@ header {
 .fullImage {
     height: 100%;
 }
-.w1o2 {
+.panel {
     display: inline-block;
     width: 50%;
-}
-h1 {
-    font-family: Courier, monospace;
-    text-align: center;
-    color: #f5f5f5;
+    padding: 0 60px;
 }
 .seat {
     display: inline-block;
