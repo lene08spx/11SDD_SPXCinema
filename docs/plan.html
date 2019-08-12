@@ -189,17 +189,18 @@ BEGIN GetSessions
 	RETURN foundSessions
 END
 </code></pre>
-<h3>Get Available Seats Algorithm</h3>
+<h3>Get Taken Seats Algorithm</h3>
 <pre><code>
-BEGIN GetAvailableSeats
+BEGIN GetTakenSeats
 	GET sessionSeats
-	SET emptySeats = []
+	GET sessionId
+	SET takenSeats = []
 	FOR EACH seat in sessionSeats
-		IF seat is empty THEN
-			add seat to emptySeats
+		IF seat session = sessionId THEN
+			add seat to takenSeats
 		END IF
 	NEXT
-	RETURN emptySeats
+	RETURN takenSeats
 END
 </code></pre>
 

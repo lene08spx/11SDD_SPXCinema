@@ -1,16 +1,27 @@
 import { DenoHttp, DenoFs, DenoPath, DenoMediaTypes } from "./deps.ts";
 
 const WEB_PORT = 80;
-const WEB_ROOT = "./src/web"
+const WEB_ROOT = "./src/web";
+const API_ROOT = "./src/api";
 
-async function servePage( r: DenoHttp.ServerRequest, filename?: string ): Promise<void>
+async function servePage( r: DenoHttp.ServerRequest, rootDir: string = WEB_ROOT, filename: string = "/index.html" ): Promise<void>
 {
-	let filePath = WEB_ROOT + (filename || r.url);
-	//console.log(filePath);
+	let filePath: string;
+	console.log(r.url);
+	if (r.url.endsWith("/"))
+	{
+		filePath = rootDir + filename;
+	}
+	else
+	{
+		filePath = rootDir + r.url;
+	}
+
+	console.log(`URL> ${filePath}`);
+
 	if (await DenoFs.exists( filePath ))
 	{
 		// Serve Page
-		console.log(`?> ${filePath}`);
 		r.respond({
 			"body": await Deno.readFile( filePath ),
 			"headers": new Headers([
@@ -23,28 +34,33 @@ async function servePage( r: DenoHttp.ServerRequest, filename?: string ): Promis
 	{
 		// Error 404
 		console.log(`!> 404::${r.url}`);
-		r.respond({
-			"body": new TextEncoder().encode("<!DOCTYPE html><h1>404</h1>"),
-			"headers": new Headers([
-				["Content-Type","text/html"]
-			]),
-			"status": 404
-		});
+		if (DenoPath.extname(filePath) === "html")
+		{
+			r.respond({
+				"body": new TextEncoder().encode("<!DOCTYPE html><h1>404</h1>"),
+				"headers": new Headers([
+					["Content-Type","text/html"]
+				]),
+				"status": 404
+			});
+		}
+		else r.respond({"status":404});
 	}
 }
+
 window.onload = async()=>
 {
 	const s = DenoHttp.serve(`0.0.0.0:${WEB_PORT}`);
 	console.log("-> Finished Compilation");
 	console.log(`-> SPXCinema@http://localhost:${WEB_PORT}/`);
 	for await (const r of s) {
-		switch (r.url) {
-			case "/":
-				servePage( r, "/index.html" );
-				break;
-			default:
-				servePage( r );
-				break;
+		if (r.url.startsWith("/api"))
+		{
+			servePage(r,WEB_ROOT,"seat.html");
+		}
+		else
+		{
+			servePage(r);
 		}
 	}
 	return;
