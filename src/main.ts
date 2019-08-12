@@ -26,7 +26,7 @@ async function servePage( r: DenoHttp.ServerRequest, filename?: string ): Promis
 		r.respond({
 			"body": new TextEncoder().encode("<!DOCTYPE html><h1>404</h1>"),
 			"headers": new Headers([
-				["Content-Type","text/plain"]
+				["Content-Type","text/html"]
 			]),
 			"status": 404
 		});

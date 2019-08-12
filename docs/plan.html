@@ -20,8 +20,8 @@
 			width: 100%;
 		}
 		h1, h2, h3, p, ul, li, pre {
-			float: left;
-			width: 55%;
+			width: 60%;
+			min-width: 350px
 		}
 		ul {
 			margin: 0;
@@ -31,8 +31,9 @@
 			padding-left: 0.5em;
 		}
 		img {
-			float: right;
-			max-width: 40%;
+			display: block;
+			width: 30%;
+			padding: 10px 0;
 		}
 		pre {
 			border-radius: 0.5em;
@@ -173,5 +174,107 @@ END
 	<li></li>
 </ul>
 
+<h1 class="day">12th August 2019</h1>
+<h3>Get Sessions Algorithm</h3>
+<pre><code>
+BEGIN GetSessions
+	GET cinema
+	GET film
+	SET foundSessions = []
+	FOR EACH session in list of sessions
+		IF session cinema = cinema AND session film = film THEN
+			add session to foundSessions
+		END IF
+	NEXT
+	RETURN foundSessions
+END
+</code></pre>
+<h3>Get Available Seats Algorithm</h3>
+<pre><code>
+BEGIN GetAvailableSeats
+	GET sessionSeats
+	SET emptySeats = []
+	FOR EACH seat in sessionSeats
+		IF seat is empty THEN
+			add seat to emptySeats
+		END IF
+	NEXT
+	RETURN emptySeats
+END
+</code></pre>
+
+<h3>Data Store</h3>
+<pre><code>
+Time is stored in 0000: hhmm;
+{
+	"cinemas": [
+		{
+			"id": "spx_suburb",
+			"name": "Suburb",
+			"address": "1 Main Street"
+		}
+	],
+	"films": [
+		{
+			"id": "film_name"
+			"name": "Film: Name",
+			"duration": "0000",
+			"trailer": "http://trailer.site/042.avi",
+			"director": "Name Here",
+			"description": "A thriller from the creators of nothing."
+		}
+	],
+	"sessions": [
+		{
+			"id": "session_1234567890",
+			"cinema": "spx_suburb",
+			"film": "film_name",
+			"time": "1200"
+		}
+	],
+	"bookings": [
+		{
+			"id": "1234567890"
+			"session": "session_1234567890"
+			"seat": "A1",
+			"name": "Name Here",
+			"phone": "1234567890",
+			"email": "1234567890",
+			"code": "1234567890",
+			"date": "YYYY-MM-DD"
+		}
+	]
+}
+</code></pre>
+<h3>Work</h3>
+<p>Created Data File</p>
+<p>XHR for AJAX json requests - https://www.w3schools.com/js/js_json_http.asp</p>
+<h3>Debugging Debugging Errors</h3>
+<img src="s4_20190812.png">
+<p>
+<strong>Expected: </strong>When visiting a page
+that does not exist (such as /maths),
+the user should be presented with an error page.
+As an initial test, this page displays only a
+heading with the error code.
+</p><img src="s5_20190812.png"><p>
+<strong>Problem: </strong>When a page is displayed,
+the browser uses the <code>Content-Type</code> header
+to determine the language defining page presentation.
+Thus, the above image of the page showing the source
+occurs.
+</p><img src="s6_20190812.png"><p>
+<strong>Cause: </strong>Inspecting the response headers,
+the <code>Content-Type</code> header is set to text/plain.
+This is ideal when sending basic data or for easily
+viewing page data when debugging. But here it means
+that the page is not represented in HTML but rather
+displays the page markup source.
+</p><img src="s7_20190812.png"><p>
+<strong>Solution: </strong>To change the
+<code>Content-Type</code> header to be
+<code>text/html</code>. Now it shows correctly.
+</p>
+<img src="s8_20190812.png">
 </body>
 </html>
