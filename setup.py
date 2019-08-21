@@ -11,7 +11,7 @@ import os
 BIN_DIR = "./bin/"
 LIB_DIR = "./lib/"
 
-DENO_URL = "https://github.com/denoland/deno/releases/download/v0.12.0/deno_win_x64.zip"
+DENO_URL = "https://github.com/denoland/deno/releases/download/v0.15.0/deno_win_x64.zip"
 DENO_STD_URL = "https://github.com/denoland/deno_std/archive/v0.12.0.zip"
 
 # Ensure Directories
