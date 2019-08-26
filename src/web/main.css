@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'magneto';
-    src: url('./magneto.ttf');
+    src: url('/img/magneto.ttf');
 }
 html{box-sizing:border-box;}
 *,*:before,*:after{box-sizing:inherit;}
@@ -34,16 +34,16 @@ h1 {
     background-color: #333333;
 }
 .carpet {
-    background-image: url("./carpet32x_grey.png");
+    background-image: url("/img/carpet32x_grey.png");
     background-size: 550px;
     image-rendering: pixelated;
     box-shadow: inset 0px 0px 50px 0px #000000;
 }
 .carpet.red {
-    background-image: url("./carpet32x_red.png");
+    background-image: url("/img/carpet32x_red.png");
 }
 .carpet.gold {
-    background-image: url("./carpet32x_gold1.png");
+    background-image: url("/img/carpet32x_gold1.png");
 }
 .fullImage {
     height: 100%;

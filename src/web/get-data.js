@@ -1,17 +1,18 @@
 /// <reference lib="dom" />
 let x = new XMLHttpRequest();
 
-x.onreadystatechange = function( e )
+x.onreadystatechange = function()
 {
 	if (this.readyState == 4 && this.status == 200)
 	{
-		JSON.parse(this.responseText);
+		let res = JSON.parse(this.responseText);
+		console.log(res);
 	}
 }
 
 async function api( uri="" )
 {
-	const r = await fetch("/api/web.json");
+	const r = await fetch("/api/"+uri);
 	if (r.status !== 200)
 	{
 		throw "API Error";
