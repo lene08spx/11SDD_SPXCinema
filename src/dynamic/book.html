@@ -1,3 +1,4 @@
+<h1></h1>
 <table style="margin: 0 auto; padding: 20px; text-align: center;"></table>
 <div style="margin: 0 auto; padding: 20px; width: 50%;">
 	<div class="panel">
@@ -13,14 +14,14 @@
 document.title = "SPX - Booking";
 
 // fill out seats from database
-let alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 for (let y = 0; y < 9; y++)
 {
 	let tr = document.createElement("tr");
 	for (let x = 0; x < 15; x++)
 	{
 		let td = document.createElement("td");
-		td.id = "seat-"+alpha[y]+"-"+String(x);
+		td.id = "seat-"+ALPHA[y]+"-"+String(x);
 		td.className = "seat";
 		td.setAttribute("data-chosen","false");
 		td.setAttribute("data-full","false");
@@ -32,7 +33,7 @@ for (let y = 0; y < 9; y++)
 			else
 				td.setAttribute("data-chosen","false");
 		});
-        td.textContent = alpha[y]+String(x);
+        td.textContent = ALPHA[y]+String(x);
 		tr.appendChild(td);
 	}
 	document.body.getElementsByTagName("table")[0].appendChild(tr);

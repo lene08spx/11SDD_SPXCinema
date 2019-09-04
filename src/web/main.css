@@ -2,7 +2,14 @@
     font-family: 'magneto';
     src: url('/img/magneto.ttf');
 }
-html{box-sizing:border-box;}
+
+/*
+    HTML Elements
+*/
+
+:root{
+    box-sizing:border-box;
+}
 *,*:before,*:after{box-sizing:inherit;}
 body {
     margin: 0;
@@ -21,28 +28,26 @@ h1 {
     text-align: center;
     color: #f5f5f5;
 }
-.card {
+hr {
     display: block;
     width: 100%;
-    margin-top: 10px;
-    padding: 20px 40px;
-    box-shadow: 0 0 7px 0 #000000;
-    font-size: 30px;
-    font-family: Courier, monospace;
-    text-align: left;
-    color: #f5f5f5;
-    text-decoration: none;
-    border-radius: 20px;
-    background-color: #333333;
+    height: 8px;
+    border: none;
+    background-color: rgb(119, 33, 62);
+}
+
+/*
+    Custom Styles
+*/
+#contentSection {
+    margin: 0 auto;
+    width: calc(100% - 120px);
 }
 .carpet {
     background-image: url("/img/carpet32x_grey.png");
     background-size: 550px;
     image-rendering: pixelated;
     box-shadow: inset 0px 0px 50px 0px #000000;
-}
-.card {
-    box-shadow: unset;
 }
 .carpet.red {
     background-image: url("/img/carpet32x_red.png");
@@ -53,16 +58,52 @@ h1 {
 .carpet.blended {
     background-image: url("/img/carpet32x_blended.png");
 }
-.card.carpet.blended:hover {
-    background-image: url("/img/carpet32x_blended_light.png");
-}
+
 .fullImage {
     height: 100%;
 }
+
 .panel {
     display: inline-block;
+    vertical-align: top;
     width: 50%;
     padding: 0 60px;
+}
+
+h1.title {
+    margin: 0;
+    padding: 30px 50px;
+    font-size: 50px;
+}
+
+/*
+    Custom Blocks
+*/
+.card {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    padding: 20px 40px;
+    border: 0;
+    box-shadow: 0 0 7px 0 #000000;
+    font-size: 30px;
+    font-family: Courier, monospace;
+    text-align: left;
+    color: #f5f5f5;
+    text-decoration: none;
+    border-radius: 20px;
+    background-color: #333333;
+    box-shadow: unset;
+}
+.card.carpet.blended:hover {
+    background-image: url("/img/carpet32x_blended_light.png");
+}
+
+.btn {
+    width: 60%;
+}
+.btn:hover {
+    cursor: pointer;
 }
 
 .seat {
