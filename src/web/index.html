@@ -7,20 +7,33 @@
 	<header class="carpet red">
 		<a href="/index.html"><img class="fullImage" src="/logo.png"></a>
 	</header>
-	<div class="panel">
+	<div id="cinemaPanel" class="panel">
 		<h1>Book by Cinema</h1>
-		<div class="card carpet gold">Chatswood</div>
-		<div class="card carpet gold">Hornsby</div>
-		<div class="card carpet gold">Mosman</div>
 	</div><!--
-	--><div class="panel">
+	--><div id="filmPanel" class="panel">
 		<h1>Book by Film</h1>
-		<ul>
-			<li>Shrek: Infinity</li>
-			<li>Ratatouille</li>
-			<li>Archimedes: We're Screwed</li>
-		</ul>
 	</div>
 	<script src="/get-data.js"></script>
+	<script>
+
+		api("cinemas").then((v)=>{
+			for (let f of v)
+			{
+				const goldCard = document.createElement("div");
+				goldCard.className = "card carpet gold";
+				goldCard.textContent = f["cinemaName"];
+				document.getElementById("cinemaPanel").appendChild(goldCard);
+			}
+		});
+		api("films").then((v)=>{
+			for (let f of v)
+			{
+				const goldCard = document.createElement("div");
+				goldCard.className = "card carpet gold";
+				goldCard.textContent = f["filmName"];
+				document.getElementById("filmPanel").appendChild(goldCard);
+			}
+		});
+	</script>
 </body>
 </html>

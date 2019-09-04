@@ -9,11 +9,38 @@ import {
 
 const WEB_ROOT = "./src/web";
 const API_ROOT = "./src/api";
+const DEFAULT_SYMBOL = Symbol("default");
+const DEFAULT_FILENAME = "index.html";
 
 type PathTree = {[key: string]: ((()=>any) | PathTree)}
-const defaultSymbol = Symbol("default");
 
-async function serveAPI( r: DenoHttp.ServerRequest, object: any )
+async function getPath( r: DenoHttp.ServerRequest, filename: string ): Promise<string | null>
+{
+	let filePath: string = "";
+
+	// No file specified, use what the Request URL asks for e.g. "http://localhost/main.css".
+	if (filename === undefined)
+	{
+		if (r.url.endsWith("/"))
+			filePath = WEB_ROOT + r.url + DEFAULT_FILENAME;
+		else
+			filePath = WEB_ROOT + r.url;
+	}
+	// If we want to serve a specific file
+	else
+	{
+		if (!filename.startsWith("/"))
+			filename = "/" + filename;
+		filePath = filename;
+	}
+
+	if (await DenoFs.exists(filePath))
+		return filePath;
+	else
+		return null;
+}
+
+async function serveJSON( r: DenoHttp.ServerRequest, object: any )
 {
 	r.respond({
 		"body": enc(JSON.stringify(object)),
@@ -133,10 +160,12 @@ class SPXData
 };
 
 export {
-	serveAPI,
+	WEB_ROOT,
+	API_ROOT,
+	serveJSON,
 	servePage,
 	pathHandler,
-	defaultSymbol,
+	DEFAULT_SYMBOL,
 	I_SPXData,
 	SPXData
 };
