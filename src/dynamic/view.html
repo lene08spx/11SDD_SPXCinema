@@ -1,0 +1,41 @@
+<table style="margin: 0 auto; padding: 20px; text-align: center;"></table>
+<script>
+document.title = "SPX - View Booking";
+let bookCode = new URL(document.URL).searchParams.get("bookingCode");
+
+// fill out seats from database
+let alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+for (let y = 0; y < 9; y++)
+{
+	let tr = document.createElement("tr");
+	for (let x = 0; x < 15; x++)
+	{
+		let td = document.createElement("td");
+		td.id = "seat-"+alpha[y]+"-"+String(x);
+		td.className = "seat";
+		td.setAttribute("data-chosen","false");
+		td.setAttribute("data-full","false");
+        td.textContent = alpha[y]+String(x);
+		tr.appendChild(td);
+	}
+	document.body.getElementsByTagName("table")[0].appendChild(tr);
+}
+
+(async()=>{
+    let myBooking = await api( "bookings" + queryString() );
+    let bookings = await api( "bookings?sessionId="+String(myBooking["sessionId"]) );
+    console.log(myBooking)
+	for (let booking of bookings)
+	{
+		for (let seat of booking["bookingSeats"])
+		{
+            document.getElementById("seat-"+seat).setAttribute("data-full","true");
+            if (booking["bookingCode"] === bookCode)
+            {
+			    document.getElementById("seat-"+seat).setAttribute("data-chosen","true");
+            }
+		}
+	}
+})();
+
+</script>

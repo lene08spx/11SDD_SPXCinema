@@ -12,9 +12,7 @@ const API_ROOT = "./src/api";
 const DEFAULT_SYMBOL = Symbol("default");
 const DEFAULT_FILENAME = "index.html";
 
-type PathTree = {[key: string]: ((()=>any) | PathTree)}
-
-async function getPath( r: DenoHttp.ServerRequest, filename: string ): Promise<string | null>
+async function getPath( r: DenoHttp.ServerRequest, filename?: string ): Promise<string | null>
 {
 	let filePath: string = "";
 
@@ -29,8 +27,8 @@ async function getPath( r: DenoHttp.ServerRequest, filename: string ): Promise<s
 	// If we want to serve a specific file
 	else
 	{
-		if (!filename.startsWith("/"))
-			filename = "/" + filename;
+		if (filename.startsWith("/"))
+			filename = "." + filename;
 		filePath = filename;
 	}
 
@@ -51,111 +49,119 @@ async function serveJSON( r: DenoHttp.ServerRequest, object: any )
 	});
 }
 
-async function servePage( r: DenoHttp.ServerRequest, filename: string = "", rootDir: string = WEB_ROOT ): Promise<void>
+async function servePage( r: DenoHttp.ServerRequest, filename?: string ): Promise<void>
 {
-	let defaultFile = "index.html";
-	let filePath: string;
-	if (filename === "")
+	let filePath = await getPath(r, filename);
+	if (filePath)
 	{
-		if (r.url.endsWith("/")) filePath = rootDir + r.url + defaultFile;
-		else filePath = rootDir + r.url;
-	}
-	else
-	{
-		if (!filename.startsWith("/")) filename = "/" + filename;
-		filePath = rootDir + filename;
-	}
-
-	//console.log(`URL> ${filePath}`);
-
-	// Does the file exist
-	if (await DenoFs.exists( filePath ))
-	{
-		// Serve Page
 		r.respond({
-			"body": await Deno.readFile( filePath ),
+			"body": await Deno.open( filePath ),
 			"headers": new Headers([
 				["Content-Type", DenoMediaTypes.lookup(filePath)||"text/plain"]
 			]),
 			"status": 200
 		});
 	}
-	// Error 404
-	// File not found
 	else
 	{
-		// Return a text representation.
-		if (DenoPath.extname(filePath) === ".html")
-		{
-			r.respond({
-				"body": new TextEncoder().encode("<!DOCTYPE html><h1>404</h1>"),
-				"headers": new Headers([
-					["Content-Type", "text/html"]
-				]),
-				"status": 404
-			});
-		}
-		// Return just an error code.
-		else r.respond({"status":404});
+		r.respond({"status":404});
 	}
 }
 
-function pathHandler(request: DenoHttp.ServerRequest, tree: PathTree)
+async function serveDynamic( r: DenoHttp.ServerRequest, filename: string ): Promise<void>
 {
+	let filePath = await getPath(r, filename);
+	let queryString = new URL(r.url,"/").search;
+	if (filePath)
+	{
+		let body = await DenoFs.readFileStr("./src/dynamic/_start.html");
+		body += await DenoFs.readFileStr(filePath);
+		body += await DenoFs.readFileStr("./src/dynamic/_end.html");
+		r.respond({
+			"body": enc(body),
+			"headers": new Headers([
+				["Content-Type", "text/html"]
+			]),
+			"status": 200
+		});
+	}
+	else
+	{
+		r.respond({"status":404});
+	}
+}
+
+// an object that represents a website directory tree structure
+// everything is an object, a page is a void function
+type PathTree = {[key: string]: ((()=>any) | PathTree)}
+
+function requestPathHandler(request: DenoHttp.ServerRequest, tree: PathTree)
+{
+	// split url into a list of its paths e.g. /main/index.html -> ["main", "index.html"]
 	let url = request.url.split("?")[0].replace(/(^\/|\/$)/gm,"").split("/");
-	//console.log(url);
+	//console.log("$$",url)
 	let temp: any = tree;
+	// filter through provided tree and determine if it is an "end point" or a page or a directory
+	// if the page cannot be found, go to the default_symbol's function
 	for (let i = 0; i < url.length; i++)
 	{
 		if (temp instanceof Function) break;
-		temp = temp[url[i]] || temp[defaultSymbol];
+		temp = temp[url[i]] || temp[DEFAULT_SYMBOL];
 	}
-	if (!(temp instanceof Function)) temp = temp[defaultSymbol];
+	// "/api/" will leave the last temp as an object, choose the default symbol and run that function
+	if (!(temp instanceof Function)) temp = temp[DEFAULT_SYMBOL];
+	// run the function to handle that page
 	if (temp instanceof Function) temp();
+	// welp, i guess i stuffed up if this throws.
+	// means that there is no default function for a branch in the tree
 	else throw "Declaration is not a function.";
 }
 
 interface I_SPXData
 {
+	bookingIdTracker:		number,
 	cinemas: {
-		"cinemaId":	number,
-		"name":		string
+		"cinemaId":			number,
+		"cinemaName":		string
 	}[];
 	films: {
-		"filmId":	number,
-		"name":		string,
-		"time":		string,
-		"trailer":	string,
-		"director":	string,
-		"bio":		string
+		"filmId":			number,
+		"filmName":			string,
+		"filmDuration":		string,
+		"filmTrailer":		string,
+		"filmDirector":		string,
+		"filmDescription":	string
 	}[];
 	sessions: {
-		"sessionId":number,
-		"name":		string,
-		"filmId":	string,
+		"sessionId":		number,
+		"filmId":			number,
+		"cinemaId": 		number,
+		"sessionTime":		string
 	}[];
 	bookings: {
-		"bookingId":number,
-		"sessionId":number,
-		"seats":	string[],
-		"name":		string,
-		"phone":	string,
-		"email":	string,
-		"code":		string,
-		"date":		string
+		"bookingId":		number,
+		"sessionId":		number,
+		"bookingSeats":		string[],
+		"bookingName":		string,
+		"bookingPhone":		string,
+		"bookingEmail":		string,
+		"bookingCode":		string,
+		"bookingDate":		string
 	}[];
 };
 
 class SPXData
 {
-	public $: I_SPXData;
+	$: I_SPXData;
 	constructor( private filename: string )
 	{
 		this.$ = <I_SPXData>DenoFs.readJsonSync(filename);
 	}
-	public write()
+	async write()
 	{
-		DenoFs.writeJsonSync(this.filename, this.$);
+		await DenoFs.writeJson(this.filename, this.$, {
+			spaces: 2
+		});
 	}
 };
 
@@ -164,8 +170,9 @@ export {
 	API_ROOT,
 	serveJSON,
 	servePage,
-	pathHandler,
+	requestPathHandler,
 	DEFAULT_SYMBOL,
 	I_SPXData,
-	SPXData
+	SPXData,
+	serveDynamic
 };

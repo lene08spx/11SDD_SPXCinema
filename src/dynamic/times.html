@@ -1,0 +1,24 @@
+<div id="bookPanel" class="panel"></div>
+<script>
+document.title = "SPX - Times";
+(async()=>{
+    let sessions = await api( "sessions" + queryString() );
+    for (let session of sessions)
+    {
+        let film = await api( "films?filmId=" + session["filmId"] );
+        let cinema = await api( "cinemas?cinemaId=" + session["cinemaId"] );
+        const goldCard = document.createElement("a");
+        goldCard.className = "card carpet blended";
+        goldCard.innerHTML = "SPX " + cinema["cinemaName"] + "<br>" + film["filmName"] + "<br>" + spxTime(session["sessionTime"]);
+        goldCard.href = "/book?sessionId="+session["sessionId"];
+        document.getElementById("bookPanel").appendChild(goldCard);
+    }
+    if (sessions.length === 0)
+    {
+        const goldCard = document.createElement("a");
+        goldCard.className = "card carpet blended";
+        goldCard.textContent = "No Sessions Available";
+        document.getElementById("bookPanel").appendChild(goldCard);
+    }
+})()
+</script>

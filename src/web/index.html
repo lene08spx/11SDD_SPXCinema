@@ -2,6 +2,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="/main.css"/>
+	<script src="/spx-site.js"></script>
 </head>
 <body>
 	<header class="carpet red">
@@ -13,24 +14,24 @@
 	--><div id="filmPanel" class="panel">
 		<h1>Book by Film</h1>
 	</div>
-	<script src="/get-data.js"></script>
 	<script>
-
 		api("cinemas").then((v)=>{
-			for (let f of v)
+			for (let cinema of v)
 			{
-				const goldCard = document.createElement("div");
-				goldCard.className = "card carpet gold";
-				goldCard.textContent = f["cinemaName"];
+				const goldCard = document.createElement("a");
+				goldCard.className = "card carpet blended";
+				goldCard.textContent = cinema["cinemaName"];
+				goldCard.href = "/times?cinemaId="+cinema["cinemaId"];
 				document.getElementById("cinemaPanel").appendChild(goldCard);
 			}
 		});
 		api("films").then((v)=>{
-			for (let f of v)
+			for (let film of v)
 			{
-				const goldCard = document.createElement("div");
-				goldCard.className = "card carpet gold";
-				goldCard.textContent = f["filmName"];
+				const goldCard = document.createElement("a");
+				goldCard.className = "card carpet blended";
+				goldCard.textContent = film["filmName"];
+				goldCard.href = "/times?filmId="+film["filmId"];
 				document.getElementById("filmPanel").appendChild(goldCard);
 			}
 		});

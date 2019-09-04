@@ -2,128 +2,27 @@
 <html>
 <head>
     <link rel="stylesheet" href="/main.css"/>
+	<script src="/spx-site.js"></script>
 </head>
 <body>
-	<header class="carpet">
+	<header class="carpet red">
 		<a href="/index.html"><img class="fullImage" src="/logo.png"></a>
 	</header>
-	
-	<div class="w1o2">
-		<h1>Book by Cinema</h1>
-		<ul>
-			<li>Chatswood</li>
-			<li>Hornsby</li>
-			<li>Mosman</li>
-		</ul>
-	</div><!--
-	--><div class="w1o2">
-		<h1>Book by Film</h1>
-		<ul>
-			<li>Shrek: Infinity</li>
-			<li>Ratatouille</li>
-			<li>Archimedes: We're Screwed</li>
-		</ul>
-	</div>
-	<div style="margin: 0 auto; width: 50%; text-align: center;">
-		<div class="seat full"></div>
-		<div class="seat"></div>
-		<div class="seat"></div>
-		<div class="seat"></div>
-		<div class="seat"></div>
-		<div class="seat full"></div>
-		<div class="seat full"></div>
-		<div class="seat"></div>
-		<div class="seat"></div>
-		<div class="seat"></div>
-		<br>
-		<div class="seat"></div>
-		<div class="seat full"></div>
-		<div class="seat"></div>
-		<div class="seat full"></div>
-		<div class="seat full"></div>
-		<div class="seat"></div>
-		<div class="seat"></div>
-		<div class="seat full"></div>
-		<div class="seat"></div>
-		<div class="seat full"></div>
-		<br>
-		<div class="seat full"></div>
-		<div class="seat"></div>
-		<div class="seat"></div>
-		<div class="seat"></div>
-		<div class="seat"></div>
-		<div class="seat full"></div>
-		<div class="seat full"></div>
-		<div class="seat"></div>
-		<div class="seat"></div>
-		<div class="seat"></div>
-		<br>
-		<div class="seat"></div>
-		<div class="seat full"></div>
-		<div class="seat"></div>
-		<div class="seat full"></div>
-		<div class="seat full"></div>
-		<div class="seat"></div>
-		<div class="seat"></div>
-		<div class="seat full"></div>
-		<div class="seat"></div>
-		<div class="seat full"></div>
-		<br>
-		<div class="seat full"></div>
-		<div class="seat"></div>
-		<div class="seat"></div>
-		<div class="seat"></div>
-		<div class="seat"></div>
-		<div class="seat full"></div>
-		<div class="seat full"></div>
-		<div class="seat"></div>
-		<div class="seat"></div>
-		<div class="seat"></div>
-		<br>
-		<div class="seat"></div>
-		<div class="seat full"></div>
-		<div class="seat"></div>
-		<div class="seat full"></div>
-		<div class="seat full"></div>
-		<div class="seat"></div>
-		<div class="seat"></div>
-		<div class="seat full"></div>
-		<div class="seat"></div>
-		<div class="seat full"></div>
-		<br>
-		<div class="seat full"></div>
-		<div class="seat"></div>
-		<div class="seat"></div>
-		<div class="seat"></div>
-		<div class="seat"></div>
-		<div class="seat full"></div>
-		<div class="seat full"></div>
-		<div class="seat"></div>
-		<div class="seat"></div>
-		<div class="seat"></div>
-		<br>
-		<div class="seat"></div>
-		<div class="seat full"></div>
-		<div class="seat"></div>
-		<div class="seat full"></div>
-		<div class="seat full"></div>
-		<div class="seat"></div>
-		<div class="seat"></div>
-		<div class="seat full"></div>
-		<div class="seat"></div>
-		<div class="seat full"></div>
-	</div>
-	<!--<div class="lampBorder" style="left:0;"></div>
-	<div class="lampBorder" style="right:0;"></div>
-    <div class="pageBanner"></div>
-    <h1>Bookings</h1>
-    <h2>Book by Location</h2>
-	<h3>Chatswood</h3>
-	<h3>Hornsby</h3>
-	<h3>Mosman</h3>
-    <h2>Book by Films</h2>
-	<h3>Avengers: Endgame</h3>
-	<h3>Ratatouille</h3>
-	<h3>Star Wars Episode 4: A New Hope</h3>-->
+	<table style="margin: 0 auto; text-align: center;">
+	</table>
+	<script>
+		for (let y = 0; y < 10; y++)
+		{
+			let tr = document.createElement("tr");
+			for (let x = 0; x < 10; x++)
+			{
+				let td = document.createElement("td");
+				td.className = "seat";
+				if (Math.random() < 0.5) td.className += " full";
+				tr.appendChild(td);
+			}
+			document.body.getElementsByTagName("table")[0].appendChild(tr);
+		}
+	</script>
 </body>
 </html>

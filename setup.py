@@ -11,8 +11,8 @@ import os
 BIN_DIR = "./bin/"
 LIB_DIR = "./lib/"
 
-DENO_URL = "https://github.com/denoland/deno/releases/download/v0.15.0/deno_win_x64.zip"
-DENO_STD_URL = "https://github.com/denoland/deno_std/archive/v0.12.0.zip"
+DENO_URL = "https://github.com/denoland/deno/releases/download/v0.16.0/deno_win_x64.zip"
+DENO_STD_URL = "https://github.com/denoland/deno_std/archive/v0.16.0.zip"
 
 # Ensure Directories
 if not os.path.exists("./bin/deno_dir"):
@@ -57,7 +57,7 @@ for z in zips:
     print()
 
 ## Finalising
-os.rename("lib/deno_std-0.12.0","lib/deno_std")
+os.rename("lib/deno_std-0.16.0","lib/deno_std")
 os.system(".\\bin\\deno.exe types > .\\lib\\lib.deno.d.ts")
 
 ## Done!

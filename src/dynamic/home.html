@@ -1,0 +1,29 @@
+<div id="cinemaPanel" class="panel">
+    <h1>Book by Cinema</h1>
+</div><!--
+--><div id="filmPanel" class="panel">
+    <h1>Book by Film</h1>
+</div>
+<script>
+    document.title = "SPX - Home";
+    api("cinemas").then((v)=>{
+        for (let cinema of v)
+        {
+            const goldCard = document.createElement("a");
+            goldCard.className = "card carpet blended";
+            goldCard.textContent = cinema["cinemaName"];
+            goldCard.href = "/times?cinemaId="+cinema["cinemaId"];
+            document.getElementById("cinemaPanel").appendChild(goldCard);
+        }
+    });
+    api("films").then((v)=>{
+        for (let film of v)
+        {
+            const goldCard = document.createElement("a");
+            goldCard.className = "card carpet blended";
+            goldCard.textContent = film["filmName"];
+            goldCard.href = "/times?filmId="+film["filmId"];
+            document.getElementById("filmPanel").appendChild(goldCard);
+        }
+    });
+</script>

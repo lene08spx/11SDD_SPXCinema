@@ -6,7 +6,7 @@ html{box-sizing:border-box;}
 *,*:before,*:after{box-sizing:inherit;}
 body {
     margin: 0;
-    background-color: #222222;
+    background-color: #111111;
 }
 body > * {
     vertical-align: top;
@@ -22,6 +22,7 @@ h1 {
     color: #f5f5f5;
 }
 .card {
+    display: block;
     width: 100%;
     margin-top: 10px;
     padding: 20px 40px;
@@ -30,6 +31,7 @@ h1 {
     font-family: Courier, monospace;
     text-align: left;
     color: #f5f5f5;
+    text-decoration: none;
     border-radius: 20px;
     background-color: #333333;
 }
@@ -39,11 +41,20 @@ h1 {
     image-rendering: pixelated;
     box-shadow: inset 0px 0px 50px 0px #000000;
 }
+.card {
+    box-shadow: unset;
+}
 .carpet.red {
     background-image: url("/img/carpet32x_red.png");
 }
 .carpet.gold {
     background-image: url("/img/carpet32x_gold1.png");
+}
+.carpet.blended {
+    background-image: url("/img/carpet32x_blended.png");
+}
+.card.carpet.blended:hover {
+    background-image: url("/img/carpet32x_blended_light.png");
 }
 .fullImage {
     height: 100%;
@@ -53,14 +64,32 @@ h1 {
     width: 50%;
     padding: 0 60px;
 }
+
 .seat {
-    display: inline-block;
+    /*display: inline-block;*/
     margin: 10px;
     width: 50px;
     height: 50px;
     border-radius: 10px;
     background-color: #999999;
+    font-family: Courier, monospace;
+    color: white;
+    text-shadow: 2px 2px 3px black;
 }
-.seat.full {
+.seat:hover {
+    background-color: #555555;
+    cursor: pointer;
+}
+.seat[data-full="true"] {
     background-color: rgb(167, 10, 62);
+}
+.seat[data-full="true"]:hover {
+    cursor: not-allowed;
+}
+.seat[data-chosen="true"] {
+    background-color: goldenrod;
+}
+.seat[data-chosen="true"]:hover {
+    background-color: rgb(160, 117, 9);
+    cursor: pointer;
 }
