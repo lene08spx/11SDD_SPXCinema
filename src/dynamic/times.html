@@ -1,15 +1,32 @@
-<div id="bookPanel" class="panel"></div>
+<div id="contentSection">
+    <h1 class="title goldName">South Pacific eXtreme</h1>
+    <hr>
+    <h1 class="title">Session Times for<br><span id="cinemaFilmName" class="goldName"></span></h1>
+    <div id="bookPanel" class="panel" style="display: block; margin: 0 auto;"></div>
+</div>
 <script>
 document.title = "SPX - Times";
 (async()=>{
     let sessions = await api( "sessions" + queryString() );
+    if (queryString().includes("filmId="))
+    {
+        let film = await api( "films" + queryString() );
+        console.log(film);
+        document.getElementById("cinemaFilmName").textContent = film["filmName"];
+    }
+    else if (queryString().includes("cinemaId="))
+    {
+        let cinema = await api( "cinemas" + queryString() );
+        console.log(cinema);
+        document.getElementById("cinemaFilmName").textContent = cinema["cinemaName"];
+    }
     for (let session of sessions)
     {
         let film = await api( "films?filmId=" + session["filmId"] );
         let cinema = await api( "cinemas?cinemaId=" + session["cinemaId"] );
         const goldCard = document.createElement("a");
         goldCard.className = "card carpet blended";
-        goldCard.innerHTML = "SPX " + cinema["cinemaName"] + "<br>" + film["filmName"] + "<br>" + spxTime(session["sessionTime"]);
+        goldCard.innerHTML = "SPX " + cinema["cinemaName"] + '<br><span class="goldName">' + film["filmName"] + "</span><br>" + spxTime(session["sessionTime"]);
         goldCard.href = "/book?sessionId="+session["sessionId"];
         document.getElementById("bookPanel").appendChild(goldCard);
     }

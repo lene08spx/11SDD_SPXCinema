@@ -13,6 +13,8 @@ window.onload = async()=>
 {
 	const s = DenoHttp.serve(`0.0.0.0:${WEB_PORT}`);
 
+	console.log(`-> Deno v${Deno.version.deno}`);
+	
 	console.log(`-> SPXCinema @ http://localhost:${WEB_PORT}/home`);
 	
 	for await (const r of s)
@@ -60,6 +62,12 @@ window.onload = async()=>
 							function(v){return v["filmId"] === Number(urlParams.get("filmId"))}
 						));
 					}
+					else if (urlParams.get("sessionId"))
+					{
+						SPXCinema.serveJSON(r,DATABASE.$["sessions"].filter(
+							function(v){return v["sessionId"] === Number(urlParams.get("sessionId"))}
+						)[0]);
+					}
 					else
 					{
 						SPXCinema.serveJSON(r,DATABASE.$["sessions"]);
@@ -76,7 +84,7 @@ window.onload = async()=>
 					else if (urlParams.get("bookingCode"))
 					{
 						SPXCinema.serveJSON(r,DATABASE.$["bookings"].filter(
-							function(v){return v["bookingCode"] === decodeURIComponent(urlParams.get("bookingCode")||"")}
+							function(v){return v["bookingCode"] === urlParams.get("bookingCode")||""}
 						)[0]);
 					}
 					else
@@ -88,7 +96,10 @@ window.onload = async()=>
 					// reserve a seat given the provided information
 					// increment bookingIdTracker number
 					++DATABASE.$["bookingIdTracker"];
-					let bookCode = btoa(DATABASE.$["bookingIdTracker"].toString(32).padStart(4,"0")+crypto.getRandomValues(new Uint8Array(4)).join(","));
+					// generate booking code
+					let bookCode = Array.from(crypto.getRandomValues(new Uint8Array(2)),v=>v.toString(16).padStart(2,"0")).join("");
+					bookCode = bookCode + (DATABASE.$["bookingIdTracker"].toString(32).padStart(4,"0"));
+					// process incoming booking
 					r.body().then(v=>{
 						let d = new Date();
 						let data = <SPXCinema.I_SPXData["bookings"][0]>JSON.parse(dec(v)||"");

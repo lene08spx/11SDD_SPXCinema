@@ -1,13 +1,14 @@
-<h1></h1>
-<table style="margin: 0 auto; padding: 20px; text-align: center;"></table>
-<div style="margin: 0 auto; padding: 20px; width: 50%;">
-	<div class="panel">
-		<label>Name: <input id="inp-name" type="text"></label><br>
-		<label>Email: <input id="inp-email" type="text"></label><br>
-		<label>Phone: <input id="inp-phone" type="text"></label>
-	</div><!--
-	--><div class="panel">
-		<button onclick="makeBooking();">Book Now</button>
+<div id="contentSection">
+	<h1 class="title goldName">South Pacific eXtreme</h1>
+	<hr>
+	<h1>Choose Seats for<br><span id="sessionDetail"></span></h1>
+	<div id="cinemaScreen">Screen<div class="curve"></div></div>
+	<table id="seatTable" style="margin: 0 auto; padding: 20px; text-align: center;"></table>
+	<div id="bookingInputDetails" style="margin: 0 auto; padding: 20px; width: 50%;">
+		<label>Name:</label><input id="inp-name" class="card" type="text"><br>
+		<label>Email:</label><input id="inp-email" class="card" type="text"><br>
+		<label>Phone:</label><input id="inp-phone" class="card" type="text"><br>
+		<button class="card btn carpet blended" onclick="makeBooking();">Book Now</button>
 	</div>
 </div>
 <script>
@@ -17,6 +18,14 @@ document.title = "SPX - Booking";
 const ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 for (let y = 0; y < 9; y++)
 {
+	// insert spacing to break up cinema seating
+	if (y % 5 === 0)
+		{
+			let space = document.createElement("tr");
+			space.style.height = "50px";
+			document.getElementById("seatTable").appendChild(space);
+		}
+
 	let tr = document.createElement("tr");
 	for (let x = 0; x < 15; x++)
 	{
@@ -25,6 +34,16 @@ for (let y = 0; y < 9; y++)
 		td.className = "seat";
 		td.setAttribute("data-chosen","false");
 		td.setAttribute("data-full","false");
+		
+		// insert spacing to break up cinema seating
+		if (x % 5 === 0)
+		{
+			let space = document.createElement("td");
+			space.style.width = "50px";
+			space.style.height = "50px;"
+			tr.appendChild(space);
+		}
+
 		//if (Math.random() < 0.5) td.setAttribute("data-full","true");
 		td.addEventListener("click",function(ev){
 			if (td.getAttribute("data-full") === "true") return;
@@ -36,10 +55,20 @@ for (let y = 0; y < 9; y++)
         td.textContent = ALPHA[y]+String(x);
 		tr.appendChild(td);
 	}
-	document.body.getElementsByTagName("table")[0].appendChild(tr);
+	document.getElementById("seatTable").appendChild(tr);
 }
 
 (async()=>{
+	// Get information for page titles and info
+	let session = await api( "sessions" + queryString() );
+	let film = await api( "films?filmId=" + session["filmId"] );
+	let cinema = await api( "cinemas?cinemaId=" + session["cinemaId"] );
+	const goldCard = document.createElement("div");
+	goldCard.className = "card carpet blended";
+	goldCard.style.textAlign = "center";
+	goldCard.innerHTML = "SPX " + cinema["cinemaName"] + '<br><span class="goldName">' + film["filmName"] + "</span><br>" + spxTime(session["sessionTime"]);
+	document.getElementById("sessionDetail").appendChild(goldCard);
+
 	let bookings = await api( "bookings" + queryString() );
 	for (let booking of bookings)
 	{

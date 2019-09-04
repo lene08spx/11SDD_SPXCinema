@@ -1,5 +1,5 @@
 {
-  "bookingIdTracker": 4,
+  "bookingIdTracker": 1,
   "cinemas": [
     {
       "cinemaId": 1,
@@ -41,48 +41,6 @@
       "bookingEmail": "jmail@example.com",
       "bookingCode": "000-000-00",
       "bookingDate": "2019-08-12"
-    },
-    {
-      "bookingId": 2,
-      "sessionId": 1,
-      "bookingSeats": [
-        "D-7",
-        "E-7",
-        "E-8"
-      ],
-      "bookingName": "Oliver Lenehan",
-      "bookingPhone": "oliver@lenehan.net",
-      "bookingEmail": "1234567890",
-      "bookingCode": "MDAwMDAwMDIxOTksMTU0LDQ4LDk3LDI3LDk5LDg5LDE4",
-      "bookingDate": "2019-8-4"
-    },
-    {
-      "bookingId": 3,
-      "sessionId": 1,
-      "bookingSeats": [
-        "B-10",
-        "D-10",
-        "D-11",
-        "D-12"
-      ],
-      "bookingName": "jhfkdjsf",
-      "bookingPhone": "dfsdfds",
-      "bookingEmail": "fdfdsfsd",
-      "bookingCode": "MDAwMDAwMDMyMjAsMjYsMTUxLDI0OCwxMSwyMTYsMjQzLDEzMw==",
-      "bookingDate": "2019-8-4"
-    },
-    {
-      "bookingId": 4,
-      "sessionId": 1,
-      "bookingSeats": [
-        "B-1",
-        "B-2"
-      ],
-      "bookingName": "Name Here",
-      "bookingPhone": "name@email.net",
-      "bookingEmail": "0987654321",
-      "bookingCode": "MDAwNDI3LDIwMSw1OSwxMDU=",
-      "bookingDate": "2019-8-5"
     }
   ]
 }
