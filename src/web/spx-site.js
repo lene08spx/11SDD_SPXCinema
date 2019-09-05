@@ -29,3 +29,11 @@ function spxTime( timeString="0000" )
 	let m = timeString.slice(2,4);
 	return String(h%12||12) + ":" + m + (h<=12?" AM":" PM");
 }
+
+function spxDuration( timeString="0000" )
+{
+	let h = Number(timeString.slice(0,2));
+	let m = Number(timeString.slice(2,4));
+	// Hours + Spacing + Minutes
+	return (h?String(h)+"hr":'') + ((h&&m)?' ':'') + (m?String(m)+"min":'');
+}

@@ -146,6 +146,10 @@ div.legend * {
     vertical-align: middle;
 }
 
+.dotw {
+    color: rgb(200, 255, 117);
+}
+
 /*
     Custom Blocks
 */

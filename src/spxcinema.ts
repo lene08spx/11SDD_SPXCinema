@@ -136,7 +136,8 @@ interface I_SPXData
 		"sessionId":		number,
 		"filmId":			number,
 		"cinemaId": 		number,
-		"sessionTime":		string
+		"sessionTime":		string,
+		"sessionFrequency": string
 	}[];
 	bookings: {
 		"bookingId":		number,

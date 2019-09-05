@@ -11,13 +11,13 @@ document.title = "SPX - Times";
     if (queryString().includes("filmId="))
     {
         let film = await api( "films" + queryString() );
-        console.log(film);
+        //console.log(film);
         document.getElementById("cinemaFilmName").textContent = film["filmName"];
     }
     else if (queryString().includes("cinemaId="))
     {
         let cinema = await api( "cinemas" + queryString() );
-        console.log(cinema);
+        //console.log(cinema);
         document.getElementById("cinemaFilmName").textContent = cinema["cinemaName"];
     }
     for (let session of sessions)
@@ -26,7 +26,12 @@ document.title = "SPX - Times";
         let cinema = await api( "cinemas?cinemaId=" + session["cinemaId"] );
         const goldCard = document.createElement("a");
         goldCard.className = "card carpet blended";
-        goldCard.innerHTML = "SPX " + cinema["cinemaName"] + '<br><span class="goldName">' + film["filmName"] + "</span><br>" + spxTime(session["sessionTime"]);
+        goldCard.innerHTML = 
+		    `<span class="dotw">${session["sessionFrequency"]}</span><br>` +
+		    `SPX ${cinema["cinemaName"]} @ ${spxTime(session["sessionTime"])}<br>` +
+		    `<span class="goldName">${film["filmName"]}</span><br>` +
+            `<span style="font-size: 0.7em; color: gold;">Directed By: ${film["filmDirector"]}</span><br>` + 
+            `<span style="font-size: 0.7em; color: gold;">Duration: ${spxDuration(film["filmDuration"])}</span><br>`;
         goldCard.href = "/book?sessionId="+session["sessionId"];
         document.getElementById("bookPanel").appendChild(goldCard);
     }

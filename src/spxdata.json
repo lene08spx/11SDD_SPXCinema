@@ -1,5 +1,5 @@
 {
-  "bookingIdTracker": 4,
+  "bookingIdTracker": 5,
   "cinemas": [
     {
       "cinemaId": 1,
@@ -8,16 +8,28 @@
     {
       "cinemaId": 2,
       "cinemaName": "Mosman"
+    },
+    {
+      "cinemaId": 3,
+      "cinemaName": "Chatswood"
     }
   ],
   "films": [
     {
       "filmId": 1,
       "filmName": "Shrek: Infinity War",
-      "filmDuration": "0340",
+      "filmDuration": "0420",
       "filmTrailer": "",
       "filmDirector": "Michael Bay",
       "filmDescription": "From the director of the critically acclaimed Ninja Turtles: Far From Home, comes the best comedy mashup of the century."
+    },
+    {
+      "filmId": 2,
+      "filmName": "The Lion Queen: An Alternate Reality",
+      "filmDuration": "0045",
+      "filmTrailer": "",
+      "filmDirector": "Michael Jackson",
+      "filmDescription": "From that signing guy, comes the best alternate universe from Not-Disney."
     }
   ],
   "sessions": [
@@ -25,7 +37,15 @@
       "sessionId": 1,
       "cinemaId": 1,
       "filmId": 1,
+      "sessionFrequency": "Fridays",
       "sessionTime": "1200"
+    },
+    {
+      "sessionId": 2,
+      "cinemaId": 2,
+      "filmId": 2,
+      "sessionFrequency": "Saturdays",
+      "sessionTime": "1000"
     }
   ],
   "bookings": [
@@ -52,6 +72,21 @@
       "bookingPhone": "basd@gmal.cem",
       "bookingEmail": "7382 392 103",
       "bookingCode": "44920004",
+      "bookingDate": "2019-8-5"
+    },
+    {
+      "bookingId": 5,
+      "sessionId": 2,
+      "bookingSeats": [
+        "B-6",
+        "C-5",
+        "C-7",
+        "D-8"
+      ],
+      "bookingName": "kjhsdghkjdf",
+      "bookingPhone": "fkjsdh@fdjkdjg",
+      "bookingEmail": "123456789",
+      "bookingCode": "1e430005",
       "bookingDate": "2019-8-5"
     }
   ]

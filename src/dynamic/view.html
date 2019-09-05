@@ -2,6 +2,7 @@
 	<h1 class="title goldName">South Pacific eXtreme</h1>
 	<hr>
 	<h1>View Booking<br><br>Reminder: Please write down your booking code...<br>Code: <span id="bookingCodeEle" class="goldName"></span><br><span id="sessionDetail"></span></h1>
+	<div id="cinemaScreen">Screen<div class="curve"></div></div>
 	<table id="seatTable" style="margin: 0 auto; padding: 20px; text-align: center;"></table>
 	<div class="legend">
 		<h2>Legend: </h2>
@@ -31,7 +32,7 @@ for (let y = 0; y < 9; y++)
 		space.style.height = "50px";
 		document.getElementById("seatTable").appendChild(space);
 	}
-	
+
 	let tr = document.createElement("tr");
 	for (let x = 0; x < 15; x++)
 	{
@@ -65,9 +66,14 @@ for (let y = 0; y < 9; y++)
 	const goldCard = document.createElement("div");
 	goldCard.className = "card carpet blended";
 	goldCard.style.textAlign = "center";
-	goldCard.innerHTML = "SPX " + cinema["cinemaName"] + '<br><span class="goldName">' + film["filmName"] + "</span><br>" + spxTime(session["sessionTime"]);
-	document.getElementById("sessionDetail").appendChild(goldCard);
+	goldCard.innerHTML = 
+		`<span class="dotw">${session["sessionFrequency"]}</span><br>` +
+		`SPX ${cinema["cinemaName"]} @ ${spxTime(session["sessionTime"])}<br>` +
+		`<span class="goldName">${film["filmName"]}</span><br>` +
+		`<span style="font-size: 0.7em; color: gold;">Directed By: ${film["filmDirector"]}</span><br>` +
+		`<span style="font-size: 0.5em;">Description: ${film["filmDescription"]}</span><br>`;
 
+	document.getElementById("sessionDetail").appendChild(goldCard);
 	document.getElementById("bookingCodeEle").textContent = myBooking["bookingCode"];
 
     let bookings = await api( "bookings?sessionId="+String(myBooking["sessionId"]) );

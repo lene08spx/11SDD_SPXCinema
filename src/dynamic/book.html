@@ -78,7 +78,13 @@ for (let y = 0; y < 9; y++)
 	const goldCard = document.createElement("div");
 	goldCard.className = "card carpet blended";
 	goldCard.style.textAlign = "center";
-	goldCard.innerHTML = "SPX " + cinema["cinemaName"] + '<br><span class="goldName">' + film["filmName"] + "</span><br>" + spxTime(session["sessionTime"]);
+	goldCard.innerHTML = 
+		`<span class="dotw">${session["sessionFrequency"]}</span><br>` +
+		`SPX ${cinema["cinemaName"]} @ ${spxTime(session["sessionTime"])}<br>` +
+		`<span class="goldName">${film["filmName"]}</span><br>` +
+		`<span style="font-size: 0.7em; color: gold;">Directed By: ${film["filmDirector"]}</span><br>` +
+		`<span style="font-size: 0.5em;">Description: ${film["filmDescription"]}</span><br>`;
+
 	document.getElementById("sessionDetail").appendChild(goldCard);
 
 	let bookings = await api( "bookings" + queryString() );
