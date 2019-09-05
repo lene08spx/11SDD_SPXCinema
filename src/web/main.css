@@ -41,7 +41,9 @@ hr {
     border: none;
     background-color: rgb(129, 1, 44);
 }
-input[type="text"].card {
+input[type="text"].card,
+input[type="tel"].card,
+input[type="email"].card {
     border: 3px solid white;
 }
 
@@ -101,6 +103,7 @@ h1.title {
     color: white;
     text-align: center;
     margin-bottom: -50px;
+    overflow: hidden;
 }
 #cinemaScreen .curve {
     padding-top: 5px;
@@ -122,12 +125,25 @@ h1.title {
     font-size: 30px;
     color: white;
 }
-#bookingInputDetails input[type="text"] {
+#bookingInputDetails input[type="text"],
+#bookingInputDetails input[type="tel"],
+#bookingInputDetails input[type="email"] {
     display: inline-block;
     width: 500px;
     height: 50px;
     padding: 20px;
     font-size: 20px;
+}
+#bookingCodeEle {
+    text-decoration: underline;
+}
+div.legend {
+    font-family: Courier, monospace;
+    font-size: 30px;
+    color: white;
+}
+div.legend * {
+    vertical-align: middle;
 }
 
 /*

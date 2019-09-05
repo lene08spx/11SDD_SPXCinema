@@ -11,7 +11,6 @@ async function api( uri="", jsonBody=undefined )
 			"body": JSON.stringify(jsonBody),
 			"method": "POST"
 		});
-
 	if (r.status !== 200)
 	{
 		throw "API Error";

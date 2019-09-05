@@ -85,7 +85,7 @@ window.onload = async()=>
 					{
 						SPXCinema.serveJSON(r,DATABASE.$["bookings"].filter(
 							function(v){return v["bookingCode"] === urlParams.get("bookingCode")||""}
-						)[0]);
+						)[0] || []);
 					}
 					else
 					{

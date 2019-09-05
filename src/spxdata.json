@@ -1,5 +1,5 @@
 {
-  "bookingIdTracker": 1,
+  "bookingIdTracker": 4,
   "cinemas": [
     {
       "cinemaId": 1,
@@ -41,6 +41,18 @@
       "bookingEmail": "jmail@example.com",
       "bookingCode": "000-000-00",
       "bookingDate": "2019-08-12"
+    },
+    {
+      "bookingId": 4,
+      "sessionId": 1,
+      "bookingSeats": [
+        "G-6"
+      ],
+      "bookingName": "Fam",
+      "bookingPhone": "basd@gmal.cem",
+      "bookingEmail": "7382 392 103",
+      "bookingCode": "44920004",
+      "bookingDate": "2019-8-5"
     }
   ]
 }

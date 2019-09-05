@@ -1,4 +1,21 @@
-<table style="margin: 0 auto; padding: 20px; text-align: center;"></table>
+<div id="contentSection">
+	<h1 class="title goldName">South Pacific eXtreme</h1>
+	<hr>
+	<h1>View Booking<br><br>Reminder: Please write down your booking code...<br>Code: <span id="bookingCodeEle" class="goldName"></span><br><span id="sessionDetail"></span></h1>
+	<table id="seatTable" style="margin: 0 auto; padding: 20px; text-align: center;"></table>
+	<div class="legend">
+		<h2>Legend: </h2>
+		<div>
+			<div class="seat" data-full="true" style="display: inline-block;"></div> Full Seats
+		</div>
+		<div>
+			<div class="seat" data-chosen="true" style="display: inline-block;"></div> Selected Seats
+		</div>
+		<div>
+			<div class="seat" style="display: inline-block;"></div> Empty Seats
+		</div>
+	</div>
+</div>
 <script>
 document.title = "SPX - View Booking";
 let bookCode = new URL(document.URL).searchParams.get("bookingCode");
@@ -7,6 +24,14 @@ let bookCode = new URL(document.URL).searchParams.get("bookingCode");
 let alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 for (let y = 0; y < 9; y++)
 {
+	// insert spacing to break up cinema seating
+	if (y % 5 === 0)
+	{
+		let space = document.createElement("tr");
+		space.style.height = "50px";
+		document.getElementById("seatTable").appendChild(space);
+	}
+	
 	let tr = document.createElement("tr");
 	for (let x = 0; x < 15; x++)
 	{
@@ -15,16 +40,37 @@ for (let y = 0; y < 9; y++)
 		td.className = "seat";
 		td.setAttribute("data-chosen","false");
 		td.setAttribute("data-full","false");
+
+		// insert spacing to break up cinema seating
+		if (x % 5 === 0)
+		{
+			let space = document.createElement("td");
+			space.style.width = "50px";
+			space.style.height = "50px;"
+			tr.appendChild(space);
+		}
+
         td.textContent = alpha[y]+String(x);
 		tr.appendChild(td);
 	}
-	document.body.getElementsByTagName("table")[0].appendChild(tr);
+	document.getElementById("seatTable").appendChild(tr);
 }
 
 (async()=>{
     let myBooking = await api( "bookings" + queryString() );
+	let session = await api( "sessions?sessionId="+String(myBooking["sessionId"]) );
+	let film = await api( "films?filmId=" + session["filmId"] );
+	let cinema = await api( "cinemas?cinemaId=" + session["cinemaId"] );
+	
+	const goldCard = document.createElement("div");
+	goldCard.className = "card carpet blended";
+	goldCard.style.textAlign = "center";
+	goldCard.innerHTML = "SPX " + cinema["cinemaName"] + '<br><span class="goldName">' + film["filmName"] + "</span><br>" + spxTime(session["sessionTime"]);
+	document.getElementById("sessionDetail").appendChild(goldCard);
+
+	document.getElementById("bookingCodeEle").textContent = myBooking["bookingCode"];
+
     let bookings = await api( "bookings?sessionId="+String(myBooking["sessionId"]) );
-    console.log(myBooking)
 	for (let booking of bookings)
 	{
 		for (let seat of booking["bookingSeats"])

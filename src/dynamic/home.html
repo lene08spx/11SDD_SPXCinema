@@ -11,8 +11,8 @@
         <h1>View Booking Information</h1>
         <div class="panel">
             <h2>Enter Booking Code:</h2>
-            <input class="card" type="text">
-            <button class="card btn carpet blended">View Booking</button>
+            <input id="enterBookingCode" class="card" type="text">
+            <button class="card btn carpet blended" onclick="viewBooking();">View Booking</button>
         </div><!--
         --><div class="panel">
         </div>
@@ -40,4 +40,18 @@
             document.getElementById("filmPanel").appendChild(goldCard);
         }
     });
+
+    async function viewBooking()
+    {
+        let code = document.getElementById("enterBookingCode").value;
+        let myBooking = await api( "bookings?bookingCode="+code );
+        if (myBooking["bookingId"] !== undefined)
+        {
+            window.location.assign("/view?bookingCode="+encodeURIComponent(code));
+        }
+        else
+        {
+            alert("Please enter a valid code.");
+        }
+    }
 </script>

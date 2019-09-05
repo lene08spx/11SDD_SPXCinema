@@ -4,11 +4,23 @@
 	<h1>Choose Seats for<br><span id="sessionDetail"></span></h1>
 	<div id="cinemaScreen">Screen<div class="curve"></div></div>
 	<table id="seatTable" style="margin: 0 auto; padding: 20px; text-align: center;"></table>
-	<div id="bookingInputDetails" style="margin: 0 auto; padding: 20px; width: 50%;">
-		<label>Name:</label><input id="inp-name" class="card" type="text"><br>
-		<label>Email:</label><input id="inp-email" class="card" type="text"><br>
-		<label>Phone:</label><input id="inp-phone" class="card" type="text"><br>
-		<button class="card btn carpet blended" onclick="makeBooking();">Book Now</button>
+	<form id="bookingInputDetails" style="margin: 0 auto; padding: 20px; width: 50%;" onsubmit="return false;">
+		<label>Name:</label><input id="inp-name" class="card" type="text" required><br>
+		<label>Email:</label><input id="inp-email" class="card" type="email" required><br>
+		<label>Phone:</label><input id="inp-phone" class="card" type="tel" required><br><br>
+		<button type="submit" class="card btn carpet blended" onclick="makeBooking();">Book Now</button>
+	</form>
+	<div class="legend">
+		<h2>Legend: </h2>
+		<div>
+			<div class="seat" data-full="true" style="display: inline-block;"></div> Full Seats
+		</div>
+		<div>
+			<div class="seat" data-chosen="true" style="display: inline-block;"></div> Selected Seats
+		</div>
+		<div>
+			<div class="seat" style="display: inline-block;"></div> Empty Seats
+		</div>
 	</div>
 </div>
 <script>
@@ -20,18 +32,18 @@ for (let y = 0; y < 9; y++)
 {
 	// insert spacing to break up cinema seating
 	if (y % 5 === 0)
-		{
-			let space = document.createElement("tr");
-			space.style.height = "50px";
-			document.getElementById("seatTable").appendChild(space);
-		}
+	{
+		let space = document.createElement("tr");
+		space.style.height = "50px";
+		document.getElementById("seatTable").appendChild(space);
+	}
 
 	let tr = document.createElement("tr");
 	for (let x = 0; x < 15; x++)
 	{
 		let td = document.createElement("td");
 		td.id = "seat-"+ALPHA[y]+"-"+String(x);
-		td.className = "seat";
+		td.className = "seat seat-entity";
 		td.setAttribute("data-chosen","false");
 		td.setAttribute("data-full","false");
 		
@@ -81,6 +93,7 @@ for (let y = 0; y < 9; y++)
 
 function makeBooking()
 {
+
 	let booking = {
 		"bookingId": 0,
 		"sessionId": Number(new URL(document.URL).searchParams.get("sessionId")),
@@ -91,20 +104,28 @@ function makeBooking()
 		"bookingCode": "",
 		"bookingDate": ""
 	}
-	for (let seat of document.getElementsByClassName("seat"))
+	for (let seat of document.getElementsByClassName("seat-entity"))
 	{
 		if (seat.getAttribute("data-chosen") === "true") booking["bookingSeats"].push(seat.id.slice(5));
 	}
 	if (booking["bookingSeats"].length > 0)
 	{
-		api("reserve",booking).then(v=>{
-			console.log(v["bookingCode"]);
-			window.location.assign("/view?bookingCode="+encodeURIComponent(v["bookingCode"]));
-		});
+		if (
+			document.getElementById("inp-name").validity.valid &&
+			document.getElementById("inp-email").validity.valid &&
+			document.getElementById("inp-phone").validity.valid
+		) 
+		{
+			api("reserve",booking).then(v=>{
+				//console.log(v["bookingCode"]);
+				window.location.assign("/view?bookingCode="+encodeURIComponent(v["bookingCode"]));
+			});
+		}
 	}
 	else
 	{
 		alert("Please choose some seats first.")
 	}
 }
+//document.createElement("input").validity.valid
 </script>
