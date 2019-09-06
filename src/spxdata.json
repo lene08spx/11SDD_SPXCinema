@@ -1,5 +1,5 @@
 {
-  "bookingIdTracker": 8,
+  "bookingIdTracker": 10,
   "cinemas": [
     {
       "cinemaId": 1,
@@ -167,6 +167,37 @@
       "bookingPhone": "f",
       "bookingEmail": "f@gmail.com",
       "bookingCode": "63ea0008",
+      "bookingDate": "2019-9-6"
+    },
+    {
+      "bookingId": 9,
+      "sessionId": 4,
+      "bookingSeats": [
+        "A-1",
+        "B-5",
+        "B-13",
+        "D-9",
+        "E-0"
+      ],
+      "bookingName": "jlai",
+      "bookingPhone": "777788889999",
+      "bookingEmail": "jlaispx@gmail.com",
+      "bookingCode": "f4b80009",
+      "bookingDate": "2019-9-6"
+    },
+    {
+      "bookingId": 10,
+      "sessionId": 4,
+      "bookingSeats": [
+        "A-4",
+        "A-6",
+        "B-4",
+        "B-6"
+      ],
+      "bookingName": "jlai",
+      "bookingPhone": "tytuyuytuy",
+      "bookingEmail": "ggjhgjh@hgfhhfg.com",
+      "bookingCode": "7660000a",
       "bookingDate": "2019-9-6"
     }
   ]

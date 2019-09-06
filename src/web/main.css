@@ -52,7 +52,7 @@ input[type="email"].card {
 */
 #contentSection {
     margin: 0 auto;
-    padding-bottom: 30px;
+    padding-bottom: 60px;
     width: calc(100% - 120px);
 }
 .carpet {
@@ -148,6 +148,20 @@ div.legend * {
 
 .dotw {
     color: rgb(200, 255, 117);
+}
+
+#goHome {
+    display: inline-block;
+    background-color: black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 20px;
+    color: black;
+    font-size: 20px;
+    font-family: Courier, monospace;
+    font-weight: 900;
+    text-decoration: none;
 }
 
 /*
