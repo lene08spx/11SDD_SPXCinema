@@ -1,7 +1,7 @@
 # SPX Cinema Booking System
 
 ## Installation
-Run `setup.py`
+Run `setup.py` using Python 3
 
 ## Using
 Run `launch.bat`

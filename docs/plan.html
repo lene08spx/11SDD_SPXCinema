@@ -287,29 +287,115 @@ displays the page markup source.
 <img src="s26.png">
 <h3>Debugging API</h3>
 <img src="s9_20190813.png">
+<p>
+	This block of code is what differentiates
+	an API request from a normal html request.
+</p>
 <img src="s10_20190813.png">
+<p>
+	The browser here is display the page using
+	text purely. It has substituted an image not
+	found icon in and fonts and backgrounds are
+	not being followed as per the stylesheet.
+</p>
 <img src="s11_20190813.png">
+<p>
+	The first hint of the problem is when inspecting
+	what the browser receives as `logo.png`. A png
+	should be served with the `image/png` MIME type,
+	however it is `text/html`;
+</p>
 <img src="s12_20190813.png">
+<p>
+	Upon further inspection, the main.css file is not
+	being received as css. It is actually being
+	send the index.html page which is in no way a 
+	stylesheet.
+</p>
 <img src="s13_20190813.png">
+<p>
+	Inspecting the server logs, lines such as `/main.css`
+	show the client's request url, the `URL>` part shows
+	what the server has request the path to.
+	Interestingly enough they all resolve to `index.html`.
+</p>
 <img src="s14_20190813.png">
+<p>
+	Further inspection of the filepath handling function
+	shows that after the if statements, filepath is set.
+	This means that regardless of what was decided, it is
+	immediately overridden. In this case, rootDir is "./src/web"
+	and filename is "index.html" resulting in the above examples
+	from the server console.
+</p>
 <h3>Fixing 404 Content-Type</h3>
 <img src="s15_20190813.png">
+<p>
+	The above problem is a minor one, although
+	it technically does break WWW standards. An image 
+	file should not be classified as MIME-type
+	"text/html". So it's interesting why its appeared as such.
+</p>
 <img src="s16_20190813.png">
+<p>
+	The code documented for error 404 here is the
+	source of the problem. No matter what,
+	there is no condition or check for the file type 
+	of the requested resource. It automatically
+	sets the content type header to html and returns
+	a "pretty" 404 page.
+</p>
 <img src="s17_20190813.png">
+<p>
+	This can be correct with a simple check to see
+	if the requested resource is a html file or not,
+	and then not setting a content-type header.
+</p>
 <img src="s18_20190813.png">
+<p>
+	The only problem now is that it appears as text/plain,
+	which is not great.
+</p>
 <img src="s19_20190813.png">
+<p>
+	Looking into further details of the server's response through
+	Google Chrome's inspector, it is interesting that a content-type is
+	assigned even though the response's length is 0.
+</p>
 <img src="s20_20190813.png">
+<p>
+	The server now sends content-type as empty to hopefully tell the
+	brower to not care about the type.
+</p>
 <img src="s21_20190813.png">
+<p>
+	Checking with inspector confirms that content-type is none.
+</p>
 <img src="s22_20190813.png">
+<p>
+	Unfortunately it seems that Chrome's default MIME-type is "text/plain"
+	which is interesting to note, but unimportant.
+	MIME-types are a standard way to describe the contents of a file.
+	With the format generally following ("category"/"extension"), e.g. a ".json" file
+	is represented as "application/json" as it is used by/for applications and its extension is ".json".
+</p>
 <h3>Buttons for Selecting</h3>
 <img src="s23_20190813.png">
 
 <h1 class="day">21st August 2019</h1>
 <h3>Implementing API / URL Handling</h3>
+<p>
+	A function takes in an object and using the provided
+	keys and the request url, looks for and finds defined
+	functions to run upon certain urls. If there is no such
+	function then it calls the [DEFAULT_SYMBOL] which is a
+	special JavaScript data-entity called a symbol, which
+	acts as a unique identifier in this case as the
+	key for the function value if no other keys satisfy
+	the request url.
+</p>
 <img src="s24.png">
 <img src="s25.png">
-<p>
-</p>
 
 <h1 class="day">6th September 2019</h1>
 <h3>Get days of the next 7 days (including today)</h3>
@@ -323,5 +409,25 @@ BEGIN SPXWeek
 	RETURN week
 END
 </code></pre>
+<h3>Get booking preview</h3>
+<pre><code>
+BEGIN ViewBooking
+	GET bookingId
+	FOR each storedBookingId, storedBooking in bookings datastore
+		IF bookingId = storedBookingId THEN
+			SET selectedBooking = storedBooking
+		END IF
+	NEXT
+	DISPLAY selectedBooking
+END
+</code></pre>
+<h3>Some Algorithms</h3>
+<img src="s27.png">
+<h3>Main Menu Final Screen Design</h3>
+<img src="s28.png">
+<h3>Seat Booking Final Design</h3>
+<img src="s29.png">
+<h3>Sessions List Final Design</h3>
+<img src="s30.png">
 </body>
 </html>
