@@ -104,7 +104,7 @@ window.onload = async()=>
 						let d = new Date();
 						let data = <SPXCinema.I_SPXData["bookings"][0]>JSON.parse(dec(v)||"");
 						data["bookingId"] = DATABASE.$["bookingIdTracker"];
-						data["bookingDate"] = d.getFullYear()+"-"+d.getMonth()+"-"+d.getDate();
+						data["bookingDate"] = String(d.getFullYear())+"-"+String(d.getMonth()+1)+"-"+String(d.getDate());
 						data["bookingCode"] = bookCode;
 						DATABASE.$["bookings"].push(data);
 					})

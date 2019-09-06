@@ -283,12 +283,45 @@ displays the page markup source.
 <a href="https://regexr.com/">https://regexr.com/</a>
 
 <h1 class="day">13th August 2019</h1>
+<h3>Screens Plan (Copied from Paper)</h3>
+<img src="s26.png">
 <h3>Debugging API</h3>
+<img src="s9_20190813.png">
+<img src="s10_20190813.png">
+<img src="s11_20190813.png">
+<img src="s12_20190813.png">
+<img src="s13_20190813.png">
+<img src="s14_20190813.png">
+<h3>Fixing 404 Content-Type</h3>
+<img src="s15_20190813.png">
+<img src="s16_20190813.png">
+<img src="s17_20190813.png">
+<img src="s18_20190813.png">
+<img src="s19_20190813.png">
+<img src="s20_20190813.png">
+<img src="s21_20190813.png">
+<img src="s22_20190813.png">
+<h3>Buttons for Selecting</h3>
+<img src="s23_20190813.png">
 
 <h1 class="day">21st August 2019</h1>
 <h3>Implementing API / URL Handling</h3>
+<img src="s24.png">
+<img src="s25.png">
 <p>
-
 </p>
+
+<h1 class="day">6th September 2019</h1>
+<h3>Get days of the next 7 days (including today)</h3>
+<pre><code>
+BEGIN SPXWeek
+	GET todayDate
+	SET week = []
+	FOR integers i 0 to 6
+		add to week, todayDate + "i" days
+	NEXT
+	RETURN week
+END
+</code></pre>
 </body>
 </html>

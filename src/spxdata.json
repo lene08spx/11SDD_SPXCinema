@@ -1,5 +1,5 @@
 {
-  "bookingIdTracker": 5,
+  "bookingIdTracker": 8,
   "cinemas": [
     {
       "cinemaId": 1,
@@ -30,6 +30,14 @@
       "filmTrailer": "",
       "filmDirector": "Michael Jackson",
       "filmDescription": "From that signing guy, comes the best alternate universe from Not-Disney."
+    },
+    {
+      "filmId": 3,
+      "filmName": "Anti-Star Skirmishes: Not Any Hope to be Found",
+      "filmDuration": "0140",
+      "filmTrailer": "",
+      "filmDirector": "Lucas George",
+      "filmDescription": "Dun Dun Dun. Neeeeooowwww. Whoooosshhh."
     }
   ],
   "sessions": [
@@ -38,7 +46,7 @@
       "cinemaId": 1,
       "filmId": 1,
       "sessionFrequency": "Fridays",
-      "sessionTime": "1200"
+      "sessionTime": "0000"
     },
     {
       "sessionId": 2,
@@ -46,6 +54,48 @@
       "filmId": 2,
       "sessionFrequency": "Saturdays",
       "sessionTime": "1000"
+    },
+    {
+      "sessionId": 3,
+      "cinemaId": 3,
+      "filmId": 3,
+      "sessionFrequency": "Sundays",
+      "sessionTime": "1200"
+    },
+    {
+      "sessionId": 4,
+      "cinemaId": 2,
+      "filmId": 1,
+      "sessionFrequency": "Mondays",
+      "sessionTime": "0000"
+    },
+    {
+      "sessionId": 5,
+      "cinemaId": 2,
+      "filmId": 1,
+      "sessionFrequency": "Mondays",
+      "sessionTime": "1200"
+    },
+    {
+      "sessionId": 6,
+      "cinemaId": 2,
+      "filmId": 1,
+      "sessionFrequency": "Mondays",
+      "sessionTime": "1800"
+    },
+    {
+      "sessionId": 7,
+      "cinemaId": 3,
+      "filmId": 2,
+      "sessionFrequency": "Sundays",
+      "sessionTime": "1900"
+    },
+    {
+      "sessionId": 8,
+      "cinemaId": 2,
+      "filmId": 3,
+      "sessionFrequency": "Thursdays",
+      "sessionTime": "2000"
     }
   ],
   "bookings": [
@@ -63,31 +113,61 @@
       "bookingDate": "2019-08-12"
     },
     {
-      "bookingId": 4,
-      "sessionId": 1,
+      "bookingId": 6,
+      "sessionId": 7,
       "bookingSeats": [
-        "G-6"
+        "B-7",
+        "C-6",
+        "D-8",
+        "H-2"
       ],
-      "bookingName": "Fam",
-      "bookingPhone": "basd@gmal.cem",
-      "bookingEmail": "7382 392 103",
-      "bookingCode": "44920004",
-      "bookingDate": "2019-8-5"
+      "bookingName": "Oliver Lenehan",
+      "bookingPhone": "1234567890",
+      "bookingEmail": "oli@lene.han",
+      "bookingCode": "7a650006",
+      "bookingDate": "2019-9-6"
     },
     {
-      "bookingId": 5,
-      "sessionId": 2,
+      "bookingId": 7,
+      "sessionId": 5,
       "bookingSeats": [
-        "B-6",
-        "C-5",
-        "C-7",
-        "D-8"
+        "E-0",
+        "E-1",
+        "E-2",
+        "E-3",
+        "E-4",
+        "E-5",
+        "E-6",
+        "E-7",
+        "E-8",
+        "E-9",
+        "E-10",
+        "E-11",
+        "E-12",
+        "E-13",
+        "E-14"
       ],
-      "bookingName": "kjhsdghkjdf",
-      "bookingPhone": "fkjsdh@fdjkdjg",
-      "bookingEmail": "123456789",
-      "bookingCode": "1e430005",
-      "bookingDate": "2019-8-5"
+      "bookingName": "Gecko",
+      "bookingPhone": "555-555-555",
+      "bookingEmail": "gecko.birth@hotmail.com",
+      "bookingCode": "9e2c0007",
+      "bookingDate": "2019-9-6"
+    },
+    {
+      "bookingId": 8,
+      "sessionId": 3,
+      "bookingSeats": [
+        "E-0",
+        "E-1",
+        "E-2",
+        "E-3",
+        "E-4"
+      ],
+      "bookingName": "f",
+      "bookingPhone": "f",
+      "bookingEmail": "f@gmail.com",
+      "bookingCode": "63ea0008",
+      "bookingDate": "2019-9-6"
     }
   ]
 }

@@ -5,9 +5,9 @@
 	<div id="cinemaScreen">Screen<div class="curve"></div></div>
 	<table id="seatTable" style="margin: 0 auto; padding: 20px; text-align: center;"></table>
 	<form id="bookingInputDetails" autocomplete="off" style="margin: 0 auto; padding: 20px; width: 50%;" onsubmit="return false;">
-		<label>Name:</label><input id="inp-name" class="card" type="text" required><br>
-		<label>Email:</label><input id="inp-email" class="card" type="email" required><br>
-		<label>Phone:</label><input id="inp-phone" class="card" type="tel" required><br><br>
+		<label>Name:</label><input id="inp-name" class="card" type="text" maxlength="150" required><br>
+		<label>Email:</label><input id="inp-email" class="card" type="email" maxlength="150" required><br>
+		<label>Phone:</label><input id="inp-phone" class="card" type="tel" maxlength="30" required><br><br>
 		<button type="submit" class="card btn carpet blended" onclick="makeBooking();">Book Now</button>
 	</form>
 	<div class="legend">
@@ -79,7 +79,7 @@ for (let y = 0; y < 9; y++)
 	goldCard.className = "card carpet blended";
 	goldCard.style.textAlign = "center";
 	goldCard.innerHTML = 
-		`<span class="dotw">${session["sessionFrequency"]}</span><br>` +
+		`<span class="dotw">${spxFormatDate(spxNextDate(spxToday(),session["sessionFrequency"]))}</span><br>` +
 		`SPX ${cinema["cinemaName"]} @ ${spxTime(session["sessionTime"])}<br>` +
 		`<span class="goldName">${film["filmName"]}</span><br>` +
 		`<span style="font-size: 0.7em; color: gold;">Directed By: ${film["filmDirector"]}</span><br>` +
@@ -105,8 +105,8 @@ function makeBooking()
 		"sessionId": Number(new URL(document.URL).searchParams.get("sessionId")),
 		"bookingSeats": [],
 		"bookingName": document.getElementById("inp-name").value,
-		"bookingPhone": document.getElementById("inp-email").value,
-		"bookingEmail": document.getElementById("inp-phone").value,
+		"bookingPhone": document.getElementById("inp-phone").value,
+		"bookingEmail": document.getElementById("inp-email").value,
 		"bookingCode": "",
 		"bookingDate": ""
 	}
